@@ -1,11 +1,3 @@
-/**
- * IMPORTANT: Make sure you are using the correct package name.
- * This example uses the package name:
- * package com.example.android.justjava
- * If you get an error when copying this code into Android studio, update it to match teh package name found
- * in the project's AndroidManifest.xml file.
- **/
-
 package com.example.android.justjava;
 
 import android.annotation.SuppressLint;
@@ -16,15 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.text.NumberFormat;
+import java.util.Locale;
 
 /**
  * This app displays an order form to order coffee.
  */
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
     int quantity = 0;
     TextView price;
@@ -36,37 +30,12 @@ public class MainActivity extends AppCompatActivity {
 
         price = findViewById(R.id.price_text_view);
 
-//        This part does not work:
-//        CheckBox whippedCreamCheckbox = findViewById(R.id.whipped_cream_checkbox);
-//        CheckBox chocolateCheckbox = findViewById(R.id.chocolate_checkbox);
-//
-//        if (whippedCreamCheckbox.isChecked()) {
-//            displayPrice(price);
-//            onCheckboxClicked(price);
-//        } else if (chocolateCheckbox.isChecked()) {
-//            displayPrice(price);
-//            onCheckboxClicked(price);
-//        }
-//    }
-//
-//    public void onCheckboxClicked(View view) {
-//
-//        CheckBox language = (CheckBox) view;
-//
-//        boolean checked = language.isChecked();
-//
-//
-//        switch(view.getId()) {
-//            case R.id.whipped_cream_checkbox:
-//                if (checked){
-//                    displayPrice(price);
-//                }
-//                break;
-//            case R.id.chocolate_checkbox:
-//                if (checked)
-//                    displayPrice(price);
-//                break;
-//        }
+        final CheckBox whippedCreamCheckbox = findViewById(R.id.whipped_cream_checkbox);
+        final CheckBox chocolateCheckbox = findViewById(R.id.chocolate_checkbox);
+
+
+        whippedCreamCheckbox.setOnCheckedChangeListener(this);
+        chocolateCheckbox.setOnCheckedChangeListener(this);
 
     }
 
@@ -167,11 +136,16 @@ public class MainActivity extends AppCompatActivity {
     private String createOrderSummary(String name, int price, boolean addWhippedCream,
                                       boolean addChocolate) {
         String priceMessage = getString(R.string.order_summary_name, name);
-        priceMessage += "\n" + getString(R.string.order_summary_whipped_cream, addWhippedCream);
-        priceMessage += "\n" + getString(R.string.order_summary_chocolate, addChocolate);
+
         priceMessage += "\n" + getString(R.string.order_summary_quantity, quantity);
-        priceMessage += "\n" + getString(R.string.order_summary_price,
-                NumberFormat.getCurrencyInstance().format(price));
+
+        if (addWhippedCream) {
+            priceMessage += "\n" + getString(R.string.order_summary_whipped_cream);
+        }
+        if (addChocolate) {
+            priceMessage += "\n" + getString(R.string.order_summary_chocolate);
+        }
+        priceMessage += "\n" + getString(R.string.order_summary_price, NumberFormat.getCurrencyInstance(Locale.US).format(price));
         priceMessage += "\n" + getString(R.string.thank_you);
         return priceMessage;
     }
@@ -209,7 +183,13 @@ public class MainActivity extends AppCompatActivity {
         int price = calculatePrice(hasWhippedCream, hasChocolate);
 
         // Display the order summary on the screen
-        String message = "Total: " + price + " Hrn.";
+        String message = "Total: $ " + price;
         displayMessage(message);
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        displayPrice();
+
     }
 }

@@ -83,9 +83,9 @@
         android:id="@+id/price_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingStart="24dp"
+        android:paddingStart="16dp"
         android:paddingTop="8dp"
-        android:text="@string/initial_quantity_value"
+        android:text="@string/Total"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         tools:ignore="RtlSymmetry" />

@@ -86,7 +86,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="24dp"
         android:paddingTop="8dp"
-        android:text="@string/initial_quantity_value"
+        android:text="@string/Total"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         tools:ignore="RtlSymmetry" />
