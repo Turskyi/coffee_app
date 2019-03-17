@@ -11,7 +11,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.text.NumberFormat;
 import java.util.Locale;
 
@@ -33,12 +32,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         final CheckBox whippedCreamCheckbox = findViewById(R.id.whipped_cream_checkbox);
         final CheckBox chocolateCheckbox = findViewById(R.id.chocolate_checkbox);
 
-
         whippedCreamCheckbox.setOnCheckedChangeListener(this);
         chocolateCheckbox.setOnCheckedChangeListener(this);
-
     }
-
 
     /**
      * This method is called when the plus button is clicked.
@@ -145,7 +141,7 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         if (addChocolate) {
             priceMessage += "\n" + getString(R.string.order_summary_chocolate);
         }
-        priceMessage += "\n" + getString(R.string.order_summary_price, NumberFormat.getCurrencyInstance(Locale.US).format(price));
+        priceMessage += "\n" + getString(R.string.order_summary_price, NumberFormat.getCurrencyInstance().format(price));
         priceMessage += "\n" + getString(R.string.thank_you);
         return priceMessage;
     }
@@ -183,7 +179,8 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
         int price = calculatePrice(hasWhippedCream, hasChocolate);
 
         // Display the order summary on the screen
-        String message = "Total: $ " + price;
+        String message = getString(R.string.order_summary_price,
+                NumberFormat.getCurrencyInstance().format(price));
         displayMessage(message);
     }
 
