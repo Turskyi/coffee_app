@@ -22,7 +22,7 @@ String Storage: All strings are stored in the strings.xml resource file.
 
 Errors: The code runs without errors.
 
-Button Function: Each button updates the order TextView in its layout by adding the correct pricd of an order.
+Button Function: Each button updates the order TextView in its layout by adding the correct price of an order.
 
 
 Code Readability
