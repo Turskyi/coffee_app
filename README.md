@@ -2,7 +2,10 @@
 
 This app displays an order form for coffee and allows to send it by email.
 
+                   PROJECT SPECIFICATION
+
 CRITERIA.                    MEETS SPECIFICATIONS
+
 
 Layout.
 
