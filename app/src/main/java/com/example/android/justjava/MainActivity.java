@@ -4,15 +4,15 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.text.Editable;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.TextView;
+
 import java.text.NumberFormat;
-import java.util.Locale;
 
 /**
  * This app displays an order form to order coffee.
@@ -85,8 +85,9 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
 
         // Use an intent to launch an email app.
         // Send the order summary in the email body.
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                "mailto", "dmitriy.turskiy@gmail.com", ""));
+//        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_SUBJECT,
                 getString(R.string.order_summary_email_subject, name));
         intent.putExtra(Intent.EXTRA_TEXT, message);
@@ -187,6 +188,5 @@ public class MainActivity extends AppCompatActivity implements CompoundButton.On
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
         displayPrice();
-
     }
 }
